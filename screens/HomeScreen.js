@@ -1,11 +1,11 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TextInput } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   ChevronDownIcon,
-  SearchIcon,
   AdjustmentsIcon,
   UserIcon,
+  SearchIcon
 } from "react-native-heroicons/outline";
 
 const HomeScreen = () => {
@@ -38,6 +38,14 @@ const HomeScreen = () => {
           </View>
 
           <UserIcon size={35} color="#00CCBB" />
+
+        </View>
+        <View className='flex-row items-center space-x-2 pb-2 mx-4'>
+          <View className='flex-row flex-1 space-x-2 bg-gray-300 p-3'>
+            <SearchIcon />
+            <TextInput placeholder="Restaurants and Cuisines"/>
+          </View>
+          <AdjustmentsIcon color='#00CCBB' />
         </View>
     </View>
   );
