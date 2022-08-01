@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -18,15 +18,13 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView className="mt-10 bg-white, pt-5">
-      <Text className="text-red-500">
-
-        <View className="flex-row pb-3 items-center mx-4 space-x-2">
+    <View className="bg-white pt-10">
+        <View className="flex-row pb-3 items-center mx-2 space-x-2">
           <Image
             source={{
               uri: "https://links.papareact.com/wru",
             }}
-            className="h-7 w-7 bg-gray-300 p-4 rounded-full"
+            className="h-7 w-7 bg-gray-400 p-4 rounded-full"
           />
 
           <View className='flex-1'>
@@ -41,8 +39,7 @@ const HomeScreen = () => {
 
           <UserIcon size={35} color="#00CCBB" />
         </View>
-      </Text>
-    </SafeAreaView>
+    </View>
   );
 };
 
