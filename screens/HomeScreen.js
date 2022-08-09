@@ -37,14 +37,6 @@ const HomeScreen = () => {
       });
   }, []);
 
-  console.log(featuredCategories)
-
-  // const query = '*[_type == "featured"] { ..., restaurants[]->{ ..., dishes[]->,  },}';
-  
-  // client.fetch(query).then((data) => {
-  //   console.log(data);
-  // });
-
   return (
     <View className="bg-white pt-10">
       <View className="flex-row pb-3 items-center mx-2 space-x-2">
@@ -81,22 +73,15 @@ const HomeScreen = () => {
         }}
       >
         <Categories />
-        {/* Featured Rows */}
-        <FeaturedRow
-          id="123"
-          title="Featured"
-          description="Pad placements from our partners"
-        />
-        <FeaturedRow
-          id="1234"
-          title="Tasty Discounts"
-          description="Pad placements from our partners"
-        />
-        <FeaturedRow
-          id="12345"
-          title="Offers near you!"
-          description="Pad placements from our partners"
-        />
+        {featuredCategories?.map((category) => (
+          <FeaturedRow 
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          />
+        ))}
+        
       </ScrollView>
     </View>
   );
