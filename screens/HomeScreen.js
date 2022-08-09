@@ -1,5 +1,5 @@
 import { View, Text, Image, TextInput, ScrollView } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   ChevronDownIcon,
@@ -9,15 +9,41 @@ import {
 } from "react-native-heroicons/outline";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+import sanityClient from "../sanity";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [featuredCategories, setFeaturedCategories] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `*[_type == "featured"] {
+                     ...,
+                     restaurants[]->{
+                     ...,
+                     dishes[]->,
+                    },
+          }`
+      )
+      .then((data) => {
+        setFeaturedCategories(data);
+      });
+  }, []);
+
+  console.log(featuredCategories)
+
+  // const query = '*[_type == "featured"] { ..., restaurants[]->{ ..., dishes[]->,  },}';
+  
+  // client.fetch(query).then((data) => {
+  //   console.log(data);
+  // });
 
   return (
     <View className="bg-white pt-10">
@@ -42,7 +68,7 @@ const HomeScreen = () => {
       {/* Search */}
       <View className="flex-row items-center space-x-2 pb-2 mx-4">
         <View className="flex-row flex-1 space-x-2 bg-gray-300 p-3">
-          <SearchIcon color='gray' />
+          <SearchIcon color="gray" />
           <TextInput placeholder="Restaurants and Cuisines" />
         </View>
         <AdjustmentsIcon color="#00CCBB" />
@@ -57,17 +83,17 @@ const HomeScreen = () => {
         <Categories />
         {/* Featured Rows */}
         <FeaturedRow
-          id='123'
+          id="123"
           title="Featured"
           description="Pad placements from our partners"
         />
         <FeaturedRow
-          id='1234'
+          id="1234"
           title="Tasty Discounts"
           description="Pad placements from our partners"
         />
         <FeaturedRow
-          id='12345'
+          id="12345"
           title="Offers near you!"
           description="Pad placements from our partners"
         />
