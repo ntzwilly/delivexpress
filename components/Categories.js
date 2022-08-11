@@ -5,7 +5,6 @@ import sanityClient, { urlFor } from "../sanity";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     sanityClient
       .fetch(`*[_type == "category"] `)
