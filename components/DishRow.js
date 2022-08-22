@@ -18,8 +18,6 @@ const DishRow = ({ id, name, description, price, image }) => {
     dispatch(addToBasket({ id, name, description, price, image }));
   };
 
-  console.log(items);
-
   return (
     <>
       <TouchableOpacity
