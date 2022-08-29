@@ -11,6 +11,14 @@ const PreparingOrderScreen = () => {
         iterationCount={1}
         className="h-96 w-96"
       />
+      <Animatable.Text 
+        animation="slideInUp"
+        iterationCount={1}
+        className="text-lg my-10 text-white font-bold text-center"
+      >
+        Waiting for Restaurant to accept your order!
+      </Animatable.Text>
+
     </SafeAreaView>
   );
 };
