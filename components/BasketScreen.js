@@ -1,14 +1,39 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { View, Text, SafeAreaView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRestaurant } from "../features/restaurantSlice";
+import { selectBasketItems } from "../features/basketSlice";
 
 const BasketScreen = () => {
-  const navigation = useNavigation()
-  return (
-    <View>
-      <Text>BasketScreen</Text>
-    </View>
-  )
-}
+  const navigation = useNavigation();
+  const restaurant = useSelector(selectRestaurant);
+  const items = useSelector(selectBasketItems);
+  const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
+  const dispatch = useDispatch();
 
-export default BasketScreen
+  useEffect(() => {
+    const groupedItems = items.reduce((results, item) => {
+      (results[item.id] = results[item.id] || []).push(item);
+      return results;
+    }, {});
+    setGroupedItemsInBasket(groupedItems);
+  }, [items]);
+  
+  console.log(restaurant)
+
+  return (
+    <SafeAreaView>
+      <View>
+        <View>
+          <View>
+            <Text className="text-lg font-bold text-center">Basket</Text>
+            <Text>{restaurant.title}</Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default BasketScreen;
